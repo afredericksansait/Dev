@@ -54,7 +54,6 @@ var midpoint2 = (441 + tireDiameter) /2;
 tireProfile = ((tireHeight * 12.25) - (midpoint2 - midpoint1)) / 2;
 //draw fender line
 ctx.beginPath();
-ctx.strokeStyle = "#FF0000";
 ctx.moveTo(100, 0);
 ctx.lineTo(100, 500);
 ctx.stroke();
@@ -143,6 +142,12 @@ var midpoint1 = (441 - tireDiameter) /2;
 var midpoint2 = (441 + tireDiameter) /2;
 
 tireProfile = ((tireHeight * 12.25) - (midpoint2 - midpoint1)) / 2;
+//draw fender line
+ctx.beginPath();
+ctx.moveTo(100, 0);
+ctx.lineTo(100, 500);
+ctx.stroke();
+ctx.closePath();
 
 //draw rect
 ctx2.beginPath();
