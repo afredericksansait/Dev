@@ -103,85 +103,25 @@
                             <input id="suspensionWidth" oninput="tireFunction()" value="0" type="number" min="-100" max="399">
                         </div>
                     </div>
-                    <div class="block_two">
-                        <div class="advance_options form_two">
-                            <label for="twoWidth">New Inner Rim Width (mm)</label>
-                            <input id="twoWidth" class="ms" value="6.5" oninput="twoTireFunction()" type="number" min="-99" max="99">
-                        </div>
-                        <div class="advance_options form_two">
-                            <label for="twoWheelwellWidth">New Wheelwell Clearance (mm) </label>
-                            <input id="twoWheelwellWidth" oninput="twoTireFunction()" value="0" type="number" min="-100" max="100">
-                        </div>
-                        <div class="advance_options form_two">
-                            <label for="twoFenderWidth">New Fender Clearance (mm)</label>
-                            <input id="twoFenderWidth" oninput="twoTireFunction()" value="0" type="number" min="-99" max="99">
-                        </div>
-                        <div class="advance_options form_two">
-                            <label for="twoSuspensionWidth">New Suspension Width (mm)</label>
-                            <input id="twoSuspensionWidth" oninput="twoTireFunction()" value="0" type="number" min="0" max="99">
-                        </div>
+                    <div class="advance_options form_two">
+                        <label for="twoWidth">New Inner Rim Width (mm)</label>
+                        <input id="twoWidth" class="ms" value="6.5" oninput="twoTireFunction()" type="number" min="-99" max="99">
+                    </div>
+                    <div class="advance_options form_two">
+                        <label for="twoWheelwellWidth">New Wheelwell Clearance (mm) </label>
+                        <input id="twoWheelwellWidth" oninput="twoTireFunction()" value="0" type="number" min="-100" max="100">
+                    </div>
+                    <div class="advance_options form_two">
+                        <label for="twoFenderWidth">New Fender Clearance (mm)</label>
+                        <input id="twoFenderWidth" oninput="twoTireFunction()" value="0" type="number" min="-99" max="99">
+                    </div>
+                    <div class="advance_options form_two">
+                        <label for="twoSuspensionWidth">New Suspension Width (mm)</label>
+                        <input id="twoSuspensionWidth" oninput="twoTireFunction()" value="0" type="number" min="0" max="99">
                     </div>
                 </form>
             </div>
         <br>
-        <p>The strut shown in the diagram is for show only to help you visualize your tires.</p>
-        <p>Click on the "Show" button to display:</p>
-        <p>Inner Rims, Fender Clearance, Suspension Width, and Wheelwell Clearance</p>
-        <p>Tire Width    - The width of your tire in millimeters. <strong>195</strong>/55ZR15</p>
-        <p>Tire Profile  - The ratio of tire wall width to tire width. 195/<strong>55</strong>ZR15</p>
-        <p>Tire Diameter - The diameter of your wheels in inches. 195/55ZR<strong>15</strong> </p>
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <colgroup>
-                    <col>
-                    <col>
-                    <col span="1" class="bg-light">
-                    <col>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th id="measure" scope="col">Inches</th>
-                        <th scope="col">Tire 1</th>
-                        <th scope="col">Tire 2</th>
-                        <th scope="col">Difference</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">Diameter</th>
-                        <td id="diameterOne"></td>
-                        <td id="diameterTwo"></td>
-                        <td id="diameterPercentage">%</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Circumference</th>
-                        <td id="circumferenceOne"></td>
-                        <td id="circumferenceTwo"></td>
-                        <td id="circumferencePercentage">%</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sidewall</th>
-                        <td id="sidewallOne"></td>
-                        <td id="sidewallTwo"></td>
-                        <td id="sidewallPercentage">%</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Width</th>
-                        <td id="widthOne"></td>
-                        <td id="widthTwo"></td>
-                        <td id="widthPercentage">%</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Wheel Revolutions</th>
-                        <td id="revOne"></td>
-                        <td id="revTwo"></td>
-                        <td id="revPercentage"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    <br>
-        <input type="button" id="buttonConvert" value="Convert" onclick="convertTable()">
     </div>
 </div>
 <style>
@@ -193,6 +133,9 @@
         color: blue;
     }
     .form_one_container{
+        float:left;
+    }
+    .form_two_container{
         float:left;
     }
     .block_one{
@@ -214,10 +157,11 @@
     .form-check-input {
         width: 20px;
     }
+
     .canvasHolder{
         float:left;
         position: relative;
-        height: 500px; width: 500px; /*based on your canvas size*/
+        height: 500px; width: 320px; /*based on your canvas size*/
     }
     .canvas{
         position: absolute;
@@ -233,31 +177,27 @@
 <script>
 
 let c = document.getElementById("canvasA");
-    let d       = document.getElementById("canvasB");
-    let ctx     = c.getContext("2d");
-    let ctx2    = d.getContext("2d");
-    let initialHeight   = 500;
-    let initialWidth    = 500;
-    c.width     = initialWidth;
-    c.height    = initialHeight;
-    d.width     = initialWidth;
-    d.height    = initialHeight;
+    let d = document.getElementById("canvasB");
+    let ctx = c.getContext("2d");
+    let ctx2 = d.getContext("2d");
+    let initialHeight = 500;
+    let initialWidth = 320;
+    c.width = initialWidth;
+    c.height = initialHeight;
+    d.width = initialWidth;
+    d.height = initialHeight;
     let background = new Image();
     background.src = "https://sykjagni.sirv.com/jTkeSmK.gif";
 
     let tireImg = new Image();
     tireImg.src = "https://sykjagni.sirv.com/tire_PNG45.png";
 
-    let tireOffsetX = 250;
-    let tireOffsetY = 50;
-
-    let inches  = true;
+    let inches = true;
     let enabled = true;
     let measure = true;
-    let tires   = true;
-    let clearance = false;
+    let tires = true;
     let fendersuspension = false;
-
+    let clearance = false;
     //if enabled disable the function to draw
     function checkClearance(){
         var remember = document.getElementById("checkClearance");
@@ -283,6 +223,7 @@ let c = document.getElementById("canvasA");
             twoTireFunction();
         }
     }
+
     function checkMeasurements(){
         var remember = document.getElementById("checkMeasurements");
         if (remember.checked){
@@ -295,6 +236,7 @@ let c = document.getElementById("canvasA");
             twoTireFunction();
         }
     }
+
     function checkTires(){
         var remembers = document.getElementById("checkTires");
         if (remembers.checked){
@@ -307,6 +249,7 @@ let c = document.getElementById("canvasA");
             twoTireFunction();
         }
     }
+
     function toggleMode(){
         var divsToHide = document.getElementsByClassName("advance_options"); //divsToHide is an array
         if (enabled === true){
@@ -331,91 +274,50 @@ let c = document.getElementById("canvasA");
         tireFunction();
         twoTireFunction();
     }
-    function processTableValues(colNum, tireHeight, tireSidewall, tiredWidth){
-        document.getElementById("diameter" + colNum).textContent        = tireHeight.toFixed(2);
-        document.getElementById("circumference" + colNum).textContent   = (3.14159 * tireHeight).toFixed(2);
-        document.getElementById("sidewall" + colNum).textContent        = tireSidewall.toFixed(2);
-        document.getElementById("width" + colNum).textContent           = (tiredWidth / 25.4).toFixed(2);
-        document.getElementById("rev" + colNum).textContent             = (63360 / (3.14159 * tireHeight)).toFixed(0);
-    }
-    function processTableDifference(){
-        document.getElementById("diameterPercentage").textContent       = ((((parseFloat(document.getElementById("diameterTwo").textContent) - parseFloat(document.getElementById("diameterOne").textContent)) / parseFloat(document.getElementById("diameterOne").textContent) * 100)) || 0).toFixed(0) + "%";
-        document.getElementById("circumferencePercentage").textContent  = (((parseFloat(document.getElementById("circumferenceTwo").textContent) - parseFloat(document.getElementById("circumferenceOne").textContent)) / parseFloat(document.getElementById("circumferenceOne").textContent) * 100) || 0).toFixed(0) + "%";
-        document.getElementById("sidewallPercentage").textContent       = (((parseFloat(document.getElementById("sidewallTwo").textContent) - parseFloat(document.getElementById("sidewallOne").textContent)) / parseFloat(document.getElementById("sidewallOne").textContent) * 100) || 0).toFixed(0) + "%";
-        document.getElementById("widthPercentage").textContent          = (((parseFloat(document.getElementById("widthTwo").textContent) - parseFloat(document.getElementById("widthOne").textContent)) / parseFloat(document.getElementById("widthOne").textContent) * 100) || 0).toFixed(0) + "%";
-        document.getElementById("revPercentage").textContent            = (parseFloat(document.getElementById("revTwo").textContent) - parseFloat(document.getElementById("revOne").textContent) || 0).toFixed(0);
-    }  
-    function convertTable() {
-        if (inches === true) {
-            document.getElementById("diameterOne").textContent      = (parseFloat(document.getElementById("diameterOne").textContent) * 25.4).toFixed(0);
-            document.getElementById("circumferenceOne").textContent = (parseFloat(document.getElementById("circumferenceOne").textContent) * 25.4).toFixed(0);
-            document.getElementById("sidewallOne").textContent      = (parseFloat(document.getElementById("sidewallOne").textContent) * 25.4).toFixed(0);
-            document.getElementById("widthOne").textContent         = (parseFloat(document.getElementById("widthOne").textContent) * 25.4).toFixed(0);
 
-            document.getElementById("diameterTwo").textContent      = (parseFloat(document.getElementById("diameterTwo").textContent) * 25.4).toFixed(0);
-            document.getElementById("circumferenceTwo").textContent = (parseFloat(document.getElementById("circumferenceTwo").textContent) * 25.4).toFixed(0);
-            document.getElementById("sidewallTwo").textContent      = (parseFloat(document.getElementById("sidewallTwo").textContent) * 25.4).toFixed(0);
-            document.getElementById("widthTwo").textContent         = (parseFloat(document.getElementById("widthTwo").textContent) * 25.4).toFixed(0);
-            document.getElementById("measure").textContent          = "Millimeters";
-            inches = false;
-        } else if (inches === false) {
-            document.getElementById("diameterOne").textContent      = (parseFloat(document.getElementById("diameterOne").textContent) / 25.4).toFixed(2);
-            document.getElementById("circumferenceOne").textContent = (parseFloat(document.getElementById("circumferenceOne").textContent) / 25.4).toFixed(2);
-            document.getElementById("sidewallOne").textContent      = (parseFloat(document.getElementById("sidewallOne").textContent) / 25.4).toFixed(2);
-            document.getElementById("widthOne").textContent         = (parseFloat(document.getElementById("widthOne").textContent) / 25.4).toFixed(2);
-
-            document.getElementById("diameterTwo").textContent      = (parseFloat(document.getElementById("diameterTwo").textContent) / 25.4).toFixed(2);
-            document.getElementById("circumferenceTwo").textContent = (parseFloat(document.getElementById("circumferenceTwo").textContent) / 25.4).toFixed(2);
-            document.getElementById("sidewallTwo").textContent      = (parseFloat(document.getElementById("sidewallTwo").textContent) / 25.4).toFixed(2);
-            document.getElementById("widthTwo").textContent         = (parseFloat(document.getElementById("widthTwo").textContent) / 25.4).toFixed(2);
-            document.getElementById("measure").textContent          = "Inches";
-            inches = true;
-        }
-    }
-    
     function drawDimensions(canvasNum, tireWidth1, tireWidth2, fenderWidth, midpoint1, midpoint2, tireProfile, tireHeight, tiredWidth, strokeColor, offset){
         canvasNum.strokeStyle = strokeColor;
 
         //x line
         //big line
         canvasNum.beginPath();
-        canvasNum.moveTo((tireWidth1) - fenderWidth + 50, midpoint1 - tireProfile + tireOffsetY); //top
-        canvasNum.lineTo((tireWidth1) - fenderWidth + 50, midpoint2 + tireProfile + tireOffsetY); //bottom
+        canvasNum.moveTo((tireWidth1) - fenderWidth - 50, midpoint1 - tireProfile); //top
+        canvasNum.lineTo((tireWidth1) - fenderWidth - 50, midpoint2 + tireProfile); //bottom
         canvasNum.stroke();
         //x text
         canvasNum.font = "15px Helvetica";
         canvasNum.fillStyle = strokeColor;
-        canvasNum.fillText(tireHeight.toFixed(1),  (tireWidth1) - fenderWidth + 15, ((midpoint1 - tireProfile) + (midpoint2 + tireProfile)) / 2 + offset);
+        canvasNum.fillText(tireHeight.toFixed(1),  (tireWidth1) - fenderWidth - 80, ((midpoint1 - tireProfile) + (midpoint2 + tireProfile)) / 2 + offset);
 
         //top line
         canvasNum.beginPath();
-        canvasNum.moveTo((tireWidth1) - fenderWidth + 70, midpoint1 - tireProfile + tireOffsetY);
-        canvasNum.lineTo((tireWidth1) - fenderWidth + 50, midpoint1 - tireProfile + tireOffsetY);
+        canvasNum.moveTo((tireWidth1) - fenderWidth - 50, midpoint1 - tireProfile);
+        canvasNum.lineTo((tireWidth1) - fenderWidth - 20, midpoint1 - tireProfile);
         canvasNum.stroke();
 
         //bottom line
         canvasNum.beginPath();
-        canvasNum.moveTo((tireWidth1) - fenderWidth + 70, midpoint2 + tireProfile + tireOffsetY);
-        canvasNum.lineTo((tireWidth1) - fenderWidth + 50, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.moveTo((tireWidth1) - fenderWidth - 20, midpoint2 + tireProfile);
+        canvasNum.lineTo((tireWidth1) - fenderWidth - 50, midpoint2 + tireProfile);
         canvasNum.stroke();
 
         //y line
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
-        canvasNum.lineTo(tireWidth2 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1, (midpoint1 - tireProfile) - 30);
+        canvasNum.lineTo(tireWidth2, (midpoint1 - tireProfile) - 30);
         canvasNum.stroke();
         //y text
         canvasNum.textBaseline = "bottom";
-        canvasNum.fillText((tiredWidth / 25.4).toFixed(2),  (tireWidth1 + tireWidth2) / 2 - 20 + offset  + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.fillText((tiredWidth / 25.4).toFixed(2),  (tireWidth1 + tireWidth2) / 2 - 20 + offset , (midpoint1 - tireProfile) - 30);
 
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
-        canvasNum.lineTo(tireWidth1 + 102, (midpoint1 - tireProfile) - 10 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1, (midpoint1 - tireProfile) - 30);
+        canvasNum.lineTo(tireWidth1, (midpoint1 - tireProfile) - 10);
         canvasNum.stroke();
 
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth2 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
-        canvasNum.lineTo(tireWidth2 + 102, (midpoint1 - tireProfile) - 10 + tireOffsetY);
+        canvasNum.moveTo(tireWidth2, (midpoint1 - tireProfile) - 30);
+        canvasNum.lineTo(tireWidth2, (midpoint1 - tireProfile) - 10);
         canvasNum.stroke();
         
     }
@@ -427,8 +329,8 @@ let c = document.getElementById("canvasA");
             canvasNum.beginPath();
             canvasNum.setLineDash([2,3]);
             canvasNum.strokeStyle = strokeColor;
-            canvasNum.moveTo((newWidth) - fenderWidth + 102, midpoint1 - tireProfile + tireOffsetY);
-            canvasNum.lineTo((newWidth) - fenderWidth + 102, midpoint2 + tireProfile + tireOffsetY);
+            canvasNum.moveTo((newWidth) - fenderWidth, midpoint1 - tireProfile);
+            canvasNum.lineTo((newWidth) - fenderWidth, midpoint2 + tireProfile);
             canvasNum.stroke();
             canvasNum.setLineDash([]);
             }
@@ -437,8 +339,8 @@ let c = document.getElementById("canvasA");
             canvasNum.strokeStyle = strokeColor;
             canvasNum.setLineDash([2,3]);
 
-            canvasNum.moveTo((tireWidth1) - fenderWidth + 102, midpoint1 - tireProfile + tireOffsetY);
-            canvasNum.lineTo((tireWidth1) - fenderWidth + 102, midpoint2 + tireProfile + tireOffsetY);
+            canvasNum.moveTo((tireWidth1) - fenderWidth, midpoint1 - tireProfile);
+            canvasNum.lineTo((tireWidth1) - fenderWidth, midpoint2 + tireProfile);
             canvasNum.stroke();
             canvasNum.setLineDash([]);
             }
@@ -446,8 +348,8 @@ let c = document.getElementById("canvasA");
             canvasNum.beginPath();
             canvasNum.strokeStyle = strokeColor;
             canvasNum.setLineDash([2,3]);
-            canvasNum.moveTo(tireWidth2 + (suspensionWidth) + 102, midpoint1 - tireProfile + tireOffsetY);
-            canvasNum.lineTo(tireWidth2 + (suspensionWidth) + 102, midpoint2 + tireProfile + tireOffsetY);
+            canvasNum.moveTo(tireWidth2 + (suspensionWidth), midpoint1 - tireProfile);
+            canvasNum.lineTo(tireWidth2 + (suspensionWidth), midpoint2 + tireProfile);
             canvasNum.stroke();
             canvasNum.setLineDash([]);
         }
@@ -455,50 +357,51 @@ let c = document.getElementById("canvasA");
 
     function drawClearance(canvasNum, wheelwellWidth, midpoint1, midpoint2, tireProfile, strokeColor){
         if (enabled === true && measure === true){
+
         //draw fender line
         canvasNum.beginPath();
         canvasNum.strokeStyle = strokeColor;
-        canvasNum.moveTo(50 + 102,  (midpoint1 - tireProfile) + tireOffsetY - wheelwellWidth/2);
-        canvasNum.lineTo(250 + 102, (midpoint1 - tireProfile) + tireOffsetY - wheelwellWidth/2);
+        canvasNum.moveTo(50,  (midpoint1 - tireProfile) - wheelwellWidth/2);
+        canvasNum.lineTo(250, (midpoint1 - tireProfile) - wheelwellWidth/2);
         canvasNum.stroke();
         }
     }
     function drawProfile(canvasNum, tireWidth1, tireWidth2, widthValue, midpoint1, midpoint2, tireProfile, offsetValue){
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, midpoint1 - tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + 102, midpoint1 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1, midpoint1 - tireProfile);
+        canvasNum.lineTo(offsetValue, midpoint1);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth2 + 102, midpoint1 - tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + widthValue + 102, midpoint1 + tireOffsetY);
+        canvasNum.moveTo(tireWidth2, midpoint1 - tireProfile);
+        canvasNum.lineTo(offsetValue + widthValue, midpoint1);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, midpoint2 + tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + 102, midpoint2 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1, midpoint2 + tireProfile);
+        canvasNum.lineTo(offsetValue, midpoint2);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth2 + 102, midpoint2 + tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + widthValue + 102, midpoint2 + tireOffsetY);
+        canvasNum.moveTo(tireWidth2, midpoint2 + tireProfile);
+        canvasNum.lineTo(offsetValue + widthValue, midpoint2);
         canvasNum.stroke();        
     }
     function drawWidth(canvasNum, tireWidth1, tireWidth2, midpoint1, midpoint2, tireProfile){
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, (midpoint1 - tireProfile) + tireOffsetY); //midpoint of rectangle
-        canvasNum.lineTo(tireWidth2 + 102, (midpoint1 - tireProfile) + tireOffsetY);
+        canvasNum.moveTo(tireWidth1, (midpoint1 - tireProfile)); //midpoint of rectangle
+        canvasNum.lineTo(tireWidth2, (midpoint1 - tireProfile));
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, midpoint2 + tireProfile + tireOffsetY); //midpoint of rectangle
-        canvasNum.lineTo(tireWidth2 + 102, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.moveTo(tireWidth1, midpoint2 + tireProfile); //midpoint of rectangle
+        canvasNum.lineTo(tireWidth2, midpoint2 + tireProfile);
         canvasNum.stroke();
     }
 
     function tireFunction() { //first set
-        ctx.clearRect(0, 0, 500, 500);
-        ctx.drawImage(background, 100, 50);
+        ctx.clearRect(0, 0, 320, 500);
+        ctx.drawImage(background, 0, 0);
         let width           = document.getElementById("width").value * 12;
         let offset          = document.getElementById("offset").value / 2;
         let tireWidth       = parseInt(document.getElementById("tireWidth").value) / 4;
@@ -514,8 +417,7 @@ let c = document.getElementById("canvasA");
         let tireSidewall    = (tiredWidth * (tiredProfile / 100)) / 25.4;
         let tireHeight      = ((((tiredWidth * (tiredProfile / 100)) * 2) + (tiredDiameter * 25.4)) / 25.4);
 
-        processTableValues("One", tireHeight, tireSidewall, tiredWidth);
-        processTableDifference();
+
 
         let widthValue = 15 + parseInt(width);
         let offsetValue = 140 + parseInt(offset) - parseInt(width) / 2;
@@ -535,14 +437,14 @@ let c = document.getElementById("canvasA");
             ctx.strokeStyle    = "#FF0000";
             ctx.lineWidth      = 1.5;
             if (tires === true){
-                ctx.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , (((440 - tireDiameter) / 2) - tireProfile) + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
-                ctx.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+                ctx.rect(147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+                ctx.drawImage(tireImg,  147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             if (enabled === false){
-                ctx.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , (((440 - tireDiameter) / 2) - tireProfile) + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+            ctx.rect(147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             else{
-            ctx.rect(offsetValue + 102, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
+            ctx.rect(offsetValue, (440 - tireDiameter) / 2, widthValue, tireDiameter); //x,y,width,height
             }
             ctx.stroke();
             ctx.strokeStyle = "#000000";
@@ -570,13 +472,13 @@ let c = document.getElementById("canvasA");
             ctx.beginPath();
             ctx.strokeStyle    = "#FF0000";
             ctx.lineWidth      = 1.5;
-            ctx.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+            ctx.drawImage(tireImg,  147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             ctx.stroke();
         }
     }
 
     function twoTireFunction() {
-        ctx2.clearRect(0, 0, 500, 500);
+        ctx2.clearRect(0, 0, 320, 500);
 
         let width           = (document.getElementById("twoWidth").value) * 12;
         let offset          = (document.getElementById("twoOffset").value) / 2;
@@ -593,9 +495,6 @@ let c = document.getElementById("canvasA");
 
         let tireSidewall    = (tiredWidth * (tiredProfile / 100)) / 25.4;
         let tireHeight      = (((tiredWidth * (tiredProfile / 100))  * 2) + (tiredDiameter * 25.4)) / 25.4;
-
-        processTableValues("Two", tireHeight, tireSidewall, tiredWidth);
-        processTableDifference();
 
         let widthValue  = 15 + parseInt(width);
         let offsetValue = 140 + parseInt(offset) - parseInt(width) / 2;
@@ -615,16 +514,16 @@ let c = document.getElementById("canvasA");
             ctx2.strokeStyle    = "#0000FF";
             ctx2.lineWidth      = 1.5;
             if (enabled === false){
-                ctx2.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+            ctx2.rect(147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             else {
-                ctx2.rect(offsetValue + 102, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
+            ctx2.rect(offsetValue, (440 - tireDiameter) / 2, widthValue, tireDiameter); //x,y,width,height
             }
             if (tires === true){
-                ctx2.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
-                ctx2.globalAlpha    = 0.35;
-                ctx2.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
-                ctx2.globalAlpha    = 1;
+            ctx2.rect(147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+            ctx2.globalAlpha    = 0.35;
+            ctx2.drawImage(tireImg,  147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+            ctx2.globalAlpha    = 1;
             }
             ctx2.stroke();
             ctx2.strokeStyle = "#000000";
@@ -654,7 +553,7 @@ let c = document.getElementById("canvasA");
             ctx2.lineWidth      = 1.5;
             ctx2.globalAlpha    = 0.35;
 
-            ctx2.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+            ctx2.drawImage(tireImg,  147.5 + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             ctx2.globalAlpha    = 1;
 
             ctx2.stroke();
