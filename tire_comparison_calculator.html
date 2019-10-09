@@ -192,7 +192,12 @@
     .form_two{
         color: blue;
     }
+    .form_two_container{
+        display: table-cell;
+        vertical-align: middle;
+    }
     .form_one_container{
+        display: table-cell;
         float:left;
     }
     .block_one{
@@ -230,13 +235,10 @@
         margin-right: auto;
         overflow: hidden;
     }
-    .advance_options{
-        display: none;
-    }
 </style>
 <script>
 
-    let c = document.getElementById("canvasA");
+let c = document.getElementById("canvasA");
     let d       = document.getElementById("canvasB");
     let ctx     = c.getContext("2d");
     let ctx2    = d.getContext("2d");
@@ -246,10 +248,10 @@
     c.height    = initialHeight;
     d.width     = initialWidth;
     d.height    = initialHeight;
-
+  
     let tireImg = new Image();
     tireImg.src = "https://sykjagni.sirv.com/tire_PNG45.png";
-
+  
     let background = new Image();
     background.src = "https://sykjagni.sirv.com/jTkeSmK.gif";
 
@@ -257,12 +259,14 @@
     let tireOffsetY = 50;
 
     let inches  = true;
-    let enabled = false;
+    let enabled = true;
     let measure = true;
     let tires   = true;
     let clearance = false;
     let fendersuspension = false;
 
+    var heckMeasurements = document.getElementById("checkMeasurements");
+    var heckTires = document.getElementById("checkTires");
     //if enabled disable the function to draw
     function checkClearance(){
         var remember = document.getElementById("checkClearance");
@@ -296,7 +300,9 @@
             document.getElementById("checkFenderSuspension").disabled = false;
             tireFunction();
             twoTireFunction();
-        }else{
+        }
+
+        else{
             measure = false;
             document.getElementById("checkClearance").disabled = true;
             document.getElementById("checkFenderSuspension").disabled = true;
@@ -304,18 +310,59 @@
             twoTireFunction();
         }
     }
-    function checkTires(){
-        var remembers = document.getElementById("checkTires");
-        if (remembers.checked){
-            tires = true;
+
+    function checkMeasurements(){
+        if (heckMeasurements.checked){
+            measure = true;
+            document.getElementById("checkClearance").disabled = false;
+            document.getElementById("checkFenderSuspension").disabled = false;
             tireFunction();
             twoTireFunction();
-        }else{
-            tires = false;
+            
+        }
+        else if (!heckTires.checked && !heckMeasurements.checked){
+            document.getElementById("checkTires").checked = true;
+            tires = true;
+            measure = false;
+            document.getElementById("checkClearance").disabled = true;
+            document.getElementById("checkFenderSuspension").disabled = true;
             tireFunction();
             twoTireFunction();
         }
+        else{
+            measure = false;
+            document.getElementById("checkClearance").disabled = true;
+            document.getElementById("checkFenderSuspension").disabled = true;
+            tireFunction();
+            twoTireFunction();
+
+        }
     }
+
+    function checkTires(){
+        if (heckTires.checked){
+            tires = true;
+            tireFunction();
+            twoTireFunction();
+
+        }
+        else if (!heckTires.checked && !heckMeasurements.checked){
+            document.getElementById("checkMeasurements").checked = true;
+            tires = false;
+            measure = true;
+            document.getElementById("checkClearance").disabled = false;
+            document.getElementById("checkFenderSuspension").disabled = false;
+            tireFunction();
+            twoTireFunction();
+        }
+        else{
+            tires = false;
+            tireFunction();
+            twoTireFunction();
+
+        }
+    }
+
     function toggleMode(){
         var divsToHide = document.getElementsByClassName("advance_options"); //divsToHide is an array
         if (enabled === true){
@@ -544,8 +591,8 @@
             ctx.strokeStyle    = "#FF0000";
             ctx.lineWidth      = 1.5;
             if (tires === true){
-                ctx.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
                 ctx.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , (((440 - tireDiameter) / 2) - tireProfile) + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
+                ctx.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             if (enabled === false){
                 ctx.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , (((440 - tireDiameter) / 2) - tireProfile) + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
@@ -630,10 +677,10 @@
                 ctx2.rect(offsetValue + 102, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
             }
             if (tires === true){
+                ctx2.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
                 ctx2.globalAlpha    = 0.35;
                 ctx2.drawImage(tireImg,  tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
                 ctx2.globalAlpha    = 1;
-                ctx2.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             ctx2.stroke();
             ctx2.strokeStyle = "#000000";
@@ -668,25 +715,25 @@
 
             ctx2.stroke();
         }
+
+
     }
     // Make sure the image is loaded first otherwise nothing will draw.
 
     background.onload = function () {
+        toggleMode();
+        ctx.drawImage(tireImg,0 ,0 ,0, 0);
+        ctx2.drawImage(tireImg, 0, 0, 0, 0);
+        
         var allowedDomains = ['topspeed.com', 'cdpn.io'];
         console.log(document.domain);
         if (allowedDomains.indexOf(document.domain) == -1) {
         // Code to redirect here
         //window.location.href = "https://www.topspeed.com";
         }
-        tireFunction();
-        twoTireFunction();
     };
-
-
     //https://obfuscator.io/
     //https://javascriptobfuscator.com/Javascript-Obfuscator.aspx
-    //http://www.jsnice.org/
-    //https://beautifier.io/
 </script>
 </body>
 </html>
