@@ -14,6 +14,8 @@
             <canvas class="canvas" id="canvasB"></canvas>
         </div>
         <div class="form_holder">
+            <a href="https://www.topspeed.com"><img src="//pictures.topspeed.com/images/2015/logo.svg" alt=""></a><h4>Tire Comparison Calculator</h4>
+            <p>
             <div class="form_one_container">
                 <form class="form_one">
                     <div>
@@ -58,31 +60,31 @@
             </div>
         <br>
         <div class="form-check">
-            <input class="form-check-input" onclick="checkTires()" type="checkbox" value="" id="checkTires" checked>
-            <label class="form-check-label" for="checkTires">
-                Show Tires
+            <label class="lock locka" for="checkTires">
+            <input onclick="checkTires()" type="checkbox" value="" id="checkTires" checked>
+                <span>Show Tires</span>
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" onclick="checkMeasurements()" type="checkbox" value="" id="checkMeasurements" checked>
-            <label class="form-check-label" for="checkMeasurements">
-                Show Measurements
+            <label class="lock" for="checkMeasurements">
+                <input onclick="checkMeasurements()" type="checkbox" value="" id="checkMeasurements" checked>
+                <span>Show Measurements</span>
             </label>
         </div>
         <div class="form-check advance_options">
-            <input class="form-check-input" onclick="checkClearance()" type="checkbox" value="" id="checkClearance">
-            <label class="form-check-label" for="checkClearance">
-                Show Clearance
+            <label class="lock lockd" for="checkClearance">
+            <input onclick="checkClearance()" type="checkbox" value="" id="checkClearance">
+                <span>Show Clearance</span>
             </label>
         </div>
         <div class="form-check advance_options">
-            <input class="form-check-input" onclick="checkFenderSuspension()" type="checkbox" value="" id="checkFenderSuspension">
-            <label class="form-check-label" for="checkFenderSuspension">
-                Show Fender and Suspension
+            <label class="lock lockd" for="checkFenderSuspension">
+            <input onclick="checkFenderSuspension()" type="checkbox" value="" id="checkFenderSuspension">
+                <span>Show Fender and Suspension</span>
             </label>
         </div>
             <p></p>
-            <input type="button" id="buttonToggle" value="Show More Options" onclick="toggleMode()">
+            <input type="button" id="buttonToggle" class="example_c" value="Show More Options" onclick="toggleMode()">
             <div class="form_three_container">
                 <form class="form_three">
                     <div class="block_one">
@@ -124,9 +126,10 @@
                 </form>
             </div>
         <br>
-        <p>The strut shown in the diagram is for show only to help you visualize your tires.</p>
-        <p>Click on the "Show" button to display:</p>
-        <p>Inner Rims, Fender Clearance, Suspension Width, and Wheelwell Clearance</p>
+        <p>The diagram is only for show to help you visualize your tires.</p>
+        <p>Click on the "Show" button to display the Inner Rims,</p>
+        <p> Fender Clearance, Suspension Width, and Wheelwell Clearance.</p>
+        <br>
         <p>Tire Width    - The width of your tire in millimeters. <strong>195</strong>/55ZR15</p>
         <p>Tire Profile  - The ratio of tire wall width to tire width. 195/<strong>55</strong>ZR15</p>
         <p>Tire Diameter - The diameter of your wheels in inches. 195/55ZR<strong>15</strong> </p>
@@ -185,12 +188,99 @@
     </div>
 </div>
 <style>
+/* checkboxes */
+.lock {
+	position:relative;
+  cursor:pointer;
+	height:32px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.lock input {
+	display:none;
+}
+.lock span:before,
+.lock span:after{
+	content:"";
+}
+
+.lock span:before {
+	width:64px;
+	height:32px;
+	margin-right:8px;
+	background:#EEE;
+	border-radius:32px;
+	display:inline-block;
+	vertical-align:middle;
+	transition:all .5s cubic-bezier(.175, .885, .32, 1);
+}
+.lock span:after {
+	margin:2px;
+	width:28px;
+	height:28px;
+	background:#FFF;
+	border-radius:28px;
+	position:absolute;
+	left:0;
+	z-index:2;
+	transition:all .5s cubic-bezier(.175, .885, .32, 1); 
+}
+.lock input:checked + span:after {
+	left:32px;
+}
+.lockd input:disabled + span:after{
+	background: #acacac;
+}
+.lock input:checked + span:before {
+	background-color:#006298;
+}
+.locka input:checked + span:before {
+	background-color:#1CC691;
+}
+
+/* button */
+    .example_c {
+        color: #fff !important;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: #006298;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        border: none;
+        transition: all 0.4s ease 0s;
+    }
+    .example_c:hover {
+        background: #434343;
+        letter-spacing: 1px;
+        -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+        transition: all 0.4s ease 0s;
+    }
+    /* form css */
+    p { margin: 5px }
+    .canvasHolder {
+        position: fixed;
+    }
     .form_holder{
         background-color:#f8f8ff;
         float: left;
     }
     .form_two{
         color: blue;
+    }
+    .block_two{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .block_one{
+        display: table-cell;
+        float:left;
     }
     .form_two_container{
         display: table-cell;
@@ -207,6 +297,7 @@
         margin-right: 20px;
         color: red;
     }
+    /* refactor to specfici button */
     input, label {
         display:block;
     }
@@ -237,8 +328,7 @@
     }
 </style>
 <script>
-
-let c = document.getElementById("canvasA");
+    let c = document.getElementById("canvasA");
     let d       = document.getElementById("canvasB");
     let ctx     = c.getContext("2d");
     let ctx2    = d.getContext("2d");
@@ -255,7 +345,7 @@ let c = document.getElementById("canvasA");
     let background = new Image();
     background.src = "https://sykjagni.sirv.com/jTkeSmK.gif";
 
-    let tireOffsetX = 250;
+    let tireOffsetX = 200;
     let tireOffsetY = 50;
 
     let inches  = true;
@@ -267,9 +357,11 @@ let c = document.getElementById("canvasA");
 
     var heckMeasurements = document.getElementById("checkMeasurements");
     var heckTires = document.getElementById("checkTires");
+    var remember = document.getElementById("checkClearance");
+    var remember = document.getElementById("checkFenderSuspension");
+
     //if enabled disable the function to draw
     function checkClearance(){
-        var remember = document.getElementById("checkClearance");
         if (remember.checked){
             clearance = true;
             tireFunction();
@@ -281,31 +373,12 @@ let c = document.getElementById("canvasA");
         }
     }
     function checkFenderSuspension(){
-        var remember = document.getElementById("checkFenderSuspension");
         if (remember.checked){
             fendersuspension = true;
             tireFunction();
             twoTireFunction();
         }else{
             fendersuspension = false;
-            tireFunction();
-            twoTireFunction();
-        }
-    }
-    function checkMeasurements(){
-        var remember = document.getElementById("checkMeasurements");
-        if (remember.checked){
-            measure = true;
-            document.getElementById("checkClearance").disabled = false;
-            document.getElementById("checkFenderSuspension").disabled = false;
-            tireFunction();
-            twoTireFunction();
-        }
-
-        else{
-            measure = false;
-            document.getElementById("checkClearance").disabled = true;
-            document.getElementById("checkFenderSuspension").disabled = true;
             tireFunction();
             twoTireFunction();
         }
@@ -372,7 +445,7 @@ let c = document.getElementById("canvasA");
                 //divsToHide[i].style.visibility = "hidden"; // or
                 divsToHide[i].style.display = "none"; // depending on what you"re doing
             }
-            document.getElementById("buttonToggle").value = "Show More Options";
+            document.getElementById("buttonToggle").value = "Show More";
         }
         else if (enabled === false) {
             enabled = true;
@@ -407,36 +480,43 @@ let c = document.getElementById("canvasA");
             document.getElementById("circumferenceOne").textContent = (parseFloat(document.getElementById("circumferenceOne").textContent) * 25.4).toFixed(0);
             document.getElementById("sidewallOne").textContent      = (parseFloat(document.getElementById("sidewallOne").textContent) * 25.4).toFixed(0);
             document.getElementById("widthOne").textContent         = (parseFloat(document.getElementById("widthOne").textContent) * 25.4).toFixed(0);
+            document.getElementById("revOne").textContent           = (parseFloat(document.getElementById("revOne").textContent) / 1.6).toFixed(0);
 
             document.getElementById("diameterTwo").textContent      = (parseFloat(document.getElementById("diameterTwo").textContent) * 25.4).toFixed(0);
             document.getElementById("circumferenceTwo").textContent = (parseFloat(document.getElementById("circumferenceTwo").textContent) * 25.4).toFixed(0);
             document.getElementById("sidewallTwo").textContent      = (parseFloat(document.getElementById("sidewallTwo").textContent) * 25.4).toFixed(0);
             document.getElementById("widthTwo").textContent         = (parseFloat(document.getElementById("widthTwo").textContent) * 25.4).toFixed(0);
+            document.getElementById("revTwo").textContent           = (parseFloat(document.getElementById("revTwo").textContent) / 1.6).toFixed(0);
+
             document.getElementById("measure").textContent          = "Millimeters";
             inches = false;
+
         } else if (inches === false) {
             document.getElementById("diameterOne").textContent      = (parseFloat(document.getElementById("diameterOne").textContent) / 25.4).toFixed(2);
             document.getElementById("circumferenceOne").textContent = (parseFloat(document.getElementById("circumferenceOne").textContent) / 25.4).toFixed(2);
             document.getElementById("sidewallOne").textContent      = (parseFloat(document.getElementById("sidewallOne").textContent) / 25.4).toFixed(2);
             document.getElementById("widthOne").textContent         = (parseFloat(document.getElementById("widthOne").textContent) / 25.4).toFixed(2);
+            document.getElementById("revOne").textContent           = (parseFloat(document.getElementById("revOne").textContent) * 1.6).toFixed(0);
 
             document.getElementById("diameterTwo").textContent      = (parseFloat(document.getElementById("diameterTwo").textContent) / 25.4).toFixed(2);
             document.getElementById("circumferenceTwo").textContent = (parseFloat(document.getElementById("circumferenceTwo").textContent) / 25.4).toFixed(2);
             document.getElementById("sidewallTwo").textContent      = (parseFloat(document.getElementById("sidewallTwo").textContent) / 25.4).toFixed(2);
             document.getElementById("widthTwo").textContent         = (parseFloat(document.getElementById("widthTwo").textContent) / 25.4).toFixed(2);
+            document.getElementById("revTwo").textContent           = (parseFloat(document.getElementById("revTwo").textContent) * 1.6).toFixed(0);
             document.getElementById("measure").textContent          = "Inches";
             inches = true;
         }
     }
-    
+    let dimensionOffset = 0;
+    let dimensionOffsetY = 51;
     function drawDimensions(canvasNum, tireWidth1, tireWidth2, fenderWidth, midpoint1, midpoint2, tireProfile, tireHeight, tiredWidth, strokeColor, offset){
         canvasNum.strokeStyle = strokeColor;
 
         //x line
         //big line
         canvasNum.beginPath();
-        canvasNum.moveTo((tireWidth1) - fenderWidth + 50, midpoint1 - tireProfile + tireOffsetY); //top
-        canvasNum.lineTo((tireWidth1) - fenderWidth + 50, midpoint2 + tireProfile + tireOffsetY); //bottom
+        canvasNum.moveTo((tireWidth1) - fenderWidth + dimensionOffset, midpoint1 - tireProfile + tireOffsetY); //top
+        canvasNum.lineTo((tireWidth1) - fenderWidth + dimensionOffset, midpoint2 + tireProfile + tireOffsetY); //bottom
         canvasNum.stroke();
         //x text
         canvasNum.font = "15px Helvetica";
@@ -445,33 +525,33 @@ let c = document.getElementById("canvasA");
 
         //top line
         canvasNum.beginPath();
-        canvasNum.moveTo((tireWidth1) - fenderWidth + 70, midpoint1 - tireProfile + tireOffsetY);
-        canvasNum.lineTo((tireWidth1) - fenderWidth + 50, midpoint1 - tireProfile + tireOffsetY);
+        canvasNum.moveTo((tireWidth1) - fenderWidth + 20, midpoint1 - tireProfile + tireOffsetY);
+        canvasNum.lineTo((tireWidth1) - fenderWidth + dimensionOffset, midpoint1 - tireProfile + tireOffsetY);
         canvasNum.stroke();
 
         //bottom line
         canvasNum.beginPath();
-        canvasNum.moveTo((tireWidth1) - fenderWidth + 70, midpoint2 + tireProfile + tireOffsetY);
-        canvasNum.lineTo((tireWidth1) - fenderWidth + 50, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.moveTo((tireWidth1) - fenderWidth + 20, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.lineTo((tireWidth1) - fenderWidth + dimensionOffset, midpoint2 + tireProfile + tireOffsetY);
         canvasNum.stroke();
 
         //y line
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
-        canvasNum.lineTo(tireWidth2 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1 + dimensionOffset + 50, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.lineTo(tireWidth2 + dimensionOffset + 50, (midpoint1 - tireProfile) - 30 + tireOffsetY);
         canvasNum.stroke();
         //y text
         canvasNum.textBaseline = "bottom";
-        canvasNum.fillText((tiredWidth / 25.4).toFixed(2),  (tireWidth1 + tireWidth2) / 2 - 20 + offset  + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.fillText((tiredWidth / 25.4).toFixed(2),  (tireWidth1 + tireWidth2) / 2 - 20 + offset  + dimensionOffset + 50, (midpoint1 - tireProfile) - 30 + tireOffsetY);
 
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
-        canvasNum.lineTo(tireWidth1 + 102, (midpoint1 - tireProfile) - 10 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1 + dimensionOffset + 50, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.lineTo(tireWidth1 + dimensionOffset + 50, (midpoint1 - tireProfile) - 10 + tireOffsetY);
         canvasNum.stroke();
 
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth2 + 102, (midpoint1 - tireProfile) - 30 + tireOffsetY);
-        canvasNum.lineTo(tireWidth2 + 102, (midpoint1 - tireProfile) - 10 + tireOffsetY);
+        canvasNum.moveTo(tireWidth2 + dimensionOffset + 50, (midpoint1 - tireProfile) - 30 + tireOffsetY);
+        canvasNum.lineTo(tireWidth2 + dimensionOffset + 50, (midpoint1 - tireProfile) - 10 + tireOffsetY);
         canvasNum.stroke();
         
     }
@@ -483,8 +563,8 @@ let c = document.getElementById("canvasA");
             canvasNum.beginPath();
             canvasNum.setLineDash([2,3]);
             canvasNum.strokeStyle = strokeColor;
-            canvasNum.moveTo((newWidth) - fenderWidth + 102, midpoint1 - tireProfile + tireOffsetY);
-            canvasNum.lineTo((newWidth) - fenderWidth + 102, midpoint2 + tireProfile + tireOffsetY);
+            canvasNum.moveTo((newWidth) - fenderWidth + dimensionOffsetY, midpoint1 - tireProfile + tireOffsetY);
+            canvasNum.lineTo((newWidth) - fenderWidth + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY);
             canvasNum.stroke();
             canvasNum.setLineDash([]);
             }
@@ -493,8 +573,8 @@ let c = document.getElementById("canvasA");
             canvasNum.strokeStyle = strokeColor;
             canvasNum.setLineDash([2,3]);
 
-            canvasNum.moveTo((tireWidth1) - fenderWidth + 102, midpoint1 - tireProfile + tireOffsetY);
-            canvasNum.lineTo((tireWidth1) - fenderWidth + 102, midpoint2 + tireProfile + tireOffsetY);
+            canvasNum.moveTo((tireWidth1) - fenderWidth + dimensionOffsetY, midpoint1 - tireProfile + tireOffsetY);
+            canvasNum.lineTo((tireWidth1) - fenderWidth + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY);
             canvasNum.stroke();
             canvasNum.setLineDash([]);
             }
@@ -502,8 +582,8 @@ let c = document.getElementById("canvasA");
             canvasNum.beginPath();
             canvasNum.strokeStyle = strokeColor;
             canvasNum.setLineDash([2,3]);
-            canvasNum.moveTo(tireWidth2 + (suspensionWidth) + 102, midpoint1 - tireProfile + tireOffsetY);
-            canvasNum.lineTo(tireWidth2 + (suspensionWidth) + 102, midpoint2 + tireProfile + tireOffsetY);
+            canvasNum.moveTo(tireWidth2 + (suspensionWidth) + dimensionOffsetY, midpoint1 - tireProfile + tireOffsetY);
+            canvasNum.lineTo(tireWidth2 + (suspensionWidth) + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY);
             canvasNum.stroke();
             canvasNum.setLineDash([]);
         }
@@ -514,47 +594,47 @@ let c = document.getElementById("canvasA");
         //draw fender line
         canvasNum.beginPath();
         canvasNum.strokeStyle = strokeColor;
-        canvasNum.moveTo(50 + 102,  (midpoint1 - tireProfile) + tireOffsetY - wheelwellWidth/2);
-        canvasNum.lineTo(250 + 102, (midpoint1 - tireProfile) + tireOffsetY - wheelwellWidth/2);
+        canvasNum.moveTo(dimensionOffset + dimensionOffsetY + 80,  (midpoint1 - tireProfile) + tireOffsetY - wheelwellWidth/2);
+        canvasNum.lineTo(250 + dimensionOffsetY, (midpoint1 - tireProfile) + tireOffsetY - wheelwellWidth/2);
         canvasNum.stroke();
         }
     }
     function drawProfile(canvasNum, tireWidth1, tireWidth2, widthValue, midpoint1, midpoint2, tireProfile, offsetValue){
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, midpoint1 - tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + 102, midpoint1 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1 + dimensionOffsetY, midpoint1 - tireProfile + tireOffsetY);
+        canvasNum.lineTo(offsetValue + dimensionOffsetY, midpoint1 + tireOffsetY);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth2 + 102, midpoint1 - tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + widthValue + 102, midpoint1 + tireOffsetY);
+        canvasNum.moveTo(tireWidth2 + dimensionOffsetY, midpoint1 - tireProfile + tireOffsetY);
+        canvasNum.lineTo(offsetValue + widthValue + dimensionOffsetY, midpoint1 + tireOffsetY);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, midpoint2 + tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + 102, midpoint2 + tireOffsetY);
+        canvasNum.moveTo(tireWidth1 + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.lineTo(offsetValue + dimensionOffsetY, midpoint2 + tireOffsetY);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth2 + 102, midpoint2 + tireProfile + tireOffsetY);
-        canvasNum.lineTo(offsetValue + widthValue + 102, midpoint2 + tireOffsetY);
-        canvasNum.stroke();        
+        canvasNum.moveTo(tireWidth2 + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.lineTo(offsetValue + widthValue + dimensionOffsetY, midpoint2 + tireOffsetY);
+        canvasNum.stroke();
     }
     function drawWidth(canvasNum, tireWidth1, tireWidth2, midpoint1, midpoint2, tireProfile){
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, (midpoint1 - tireProfile) + tireOffsetY); //midpoint of rectangle
-        canvasNum.lineTo(tireWidth2 + 102, (midpoint1 - tireProfile) + tireOffsetY);
+        canvasNum.moveTo(tireWidth1 + dimensionOffsetY, (midpoint1 - tireProfile) + tireOffsetY); //midpoint of rectangle
+        canvasNum.lineTo(tireWidth2 + dimensionOffsetY, (midpoint1 - tireProfile) + tireOffsetY);
         canvasNum.stroke();
         
         canvasNum.beginPath();
-        canvasNum.moveTo(tireWidth1 + 102, midpoint2 + tireProfile + tireOffsetY); //midpoint of rectangle
-        canvasNum.lineTo(tireWidth2 + 102, midpoint2 + tireProfile + tireOffsetY);
+        canvasNum.moveTo(tireWidth1 + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY); //midpoint of rectangle
+        canvasNum.lineTo(tireWidth2 + dimensionOffsetY, midpoint2 + tireProfile + tireOffsetY);
         canvasNum.stroke();
     }
 
     function tireFunction() { //first set
         ctx.clearRect(0, 0, 500, 500);
-        ctx.drawImage(background, 100, 50);
+        ctx.drawImage(background, 50, 50);
         let width           = document.getElementById("width").value * 12;
         let offset          = document.getElementById("offset").value / 2;
         let tireWidth       = parseInt(document.getElementById("tireWidth").value) / 4;
@@ -598,7 +678,7 @@ let c = document.getElementById("canvasA");
                 ctx.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , (((440 - tireDiameter) / 2) - tireProfile) + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             else{
-            ctx.rect(offsetValue + 102, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
+            ctx.rect(offsetValue + dimensionOffsetY, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
             }
             ctx.stroke();
             ctx.strokeStyle = "#000000";
@@ -674,7 +754,7 @@ let c = document.getElementById("canvasA");
                 ctx2.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
             }
             else {
-                ctx2.rect(offsetValue + 102, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
+                ctx2.rect(offsetValue + dimensionOffsetY, (440 - tireDiameter) / 2 + tireOffsetY, widthValue, tireDiameter); //x,y,width,height
             }
             if (tires === true){
                 ctx2.rect(tireOffsetX + parseInt(offset) - ((tireWidth2 - tireWidth1) /2) , ((440 - tireDiameter) / 2) - tireProfile + tireOffsetY, tireWidth2 - tireWidth1, tireDiameter + (tireProfile * 2)); //x,y,width,height
@@ -721,16 +801,14 @@ let c = document.getElementById("canvasA");
     // Make sure the image is loaded first otherwise nothing will draw.
 
     background.onload = function () {
-        toggleMode();
-        ctx.drawImage(tireImg,0 ,0 ,0, 0);
-        ctx2.drawImage(tireImg, 0, 0, 0, 0);
-        
         var allowedDomains = ['topspeed.com', 'cdpn.io'];
         console.log(document.domain);
         if (allowedDomains.indexOf(document.domain) == -1) {
         // Code to redirect here
         //window.location.href = "https://www.topspeed.com";
         }
+
+        toggleMode();
     };
     //https://obfuscator.io/
     //https://javascriptobfuscator.com/Javascript-Obfuscator.aspx
